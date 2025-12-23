@@ -66,7 +66,7 @@ const LoginModal = ({ onLogin, onClose }) => {
     setLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:8080/api/auth/login`, {
+      const response = await fetch(`http://20.166.175.208:8080/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
@@ -328,7 +328,7 @@ const RecipeApp = () => {
   const fetchRecipes = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:8080/api/recipes');
+      const response = await fetch('http://20.166.175.208:8080/api/recipes');
       if (!response.ok) throw new Error('Failed to fetch recipes');
       const data = await response.json();
       setRecipes(data);
@@ -344,8 +344,8 @@ const RecipeApp = () => {
   const saveRecipe = async (recipeData) => {
     try {
       const url = editingRecipe
-        ? `http://localhost:8080/api/recipes/${editingRecipe.id}`
-        : 'http://localhost:8080/api/recipes';
+        ? `http://20.166.175.208:8080/api/recipes/${editingRecipe.id}`
+        : 'http://20.166.175.208:8080/api/recipes';
 
       const response = await fetch(url, {
         method: editingRecipe ? 'PUT' : 'POST',
@@ -373,7 +373,7 @@ const RecipeApp = () => {
     if (!window.confirm('Are you sure you want to delete this recipe?')) return;
 
     try {
-      const response = await fetch(`http://localhost:8080/api/recipes/${id}`, {
+      const response = await fetch(`http://20.166.175.208:8080/api/recipes/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${user.token}`
@@ -492,7 +492,7 @@ const RecipeApp = () => {
           <div className="text-center py-16">
             <ChefHat className="w-24 h-24 text-gray-300 mx-auto mb-4" />
             <h2 className="text-2xl font-bold text-gray-600 mb-2">No recipes yet</h2>
-            <p className="text-gray-500 mb-6">Start by adding your first recipe!</p>
+            <p className="text-gray-500 mb-6">Start by adding your first recipe.</p>
             <button
               onClick={handleAddClick}
               className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg inline-flex items-center gap-2"

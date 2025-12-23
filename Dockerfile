@@ -1,15 +1,12 @@
-FROM maven:3.9-eclipse-temurin-17 AS build
+# Dockerfile for React Frontend
+FROM node:20-alpine as build
 WORKDIR /app
-COPY pom.xml .
-COPY src ./src
-RUN mvn clean package -DskipTests
+COPY package.json package-lock.json ./
+RUN npm install
+COPY . .
+RUN npm run build
 
-FROM eclipse-temurin:17-jre-jammy
-WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
-
-RUN addgroup --system spring && adduser --system spring --ingroup spring
-USER spring:spring
-
-EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+FROM nginx:alpine
+COPY --from=build /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
