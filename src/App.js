@@ -54,11 +54,11 @@ const LoginModal = ({ onLogin, onClose }) => {
   const handleSubmit = async () => {
     // Validate inputs
     if (!username.trim()) {
-      setError('Username is required');
+      setError('Username is required.');
       return;
     }
     if (!password.trim()) {
-      setError('Password is required');
+      setError('Password is required.');
       return;
     }
 
