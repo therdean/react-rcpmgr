@@ -12,13 +12,11 @@ const useAuth = () => {
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
 
   useEffect(() => {
     const savedToken = localStorage.getItem('token');
     const savedUsername = localStorage.getItem('username');
     if (savedToken && savedUsername) {
-      setToken(savedToken);
       setUser({ username: savedUsername, token: savedToken });
     }
   }, []);
@@ -26,14 +24,12 @@ const AuthProvider = ({ children }) => {
   const login = (username, token) => {
     localStorage.setItem('token', token);
     localStorage.setItem('username', username);
-    setToken(token);
     setUser({ username, token });
   };
 
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
-    setToken(null);
     setUser(null);
   };
 

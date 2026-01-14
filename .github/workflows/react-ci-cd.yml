@@ -37,8 +37,6 @@ jobs:
 
             - name: Build React app
               run: npm run build
-              env:
-                  CI: false
 
             - name: Login to Azure Container Registry
               uses: azure/docker-login@v1
