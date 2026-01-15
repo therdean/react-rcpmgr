@@ -40,7 +40,7 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://springboot-rcpmgr-service:8080'
+const API_URL = process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL : 'http://springboot-rcpmgr-service:8080'
 
 // Login Component (Admin Only)
 const LoginModal = ({ onLogin, onClose }) => {
@@ -326,7 +326,7 @@ const RecipeApp = () => {
   const fetchRecipes = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://${API_URL}/api/recipes`);
+      const response = await fetch(`${API_URL}/api/recipes`);
       if (!response.ok) throw new Error('Failed to fetch recipes');
       const data = await response.json();
       setRecipes(data);
@@ -342,8 +342,8 @@ const RecipeApp = () => {
   const saveRecipe = async (recipeData) => {
     try {
       const url = editingRecipe
-        ? `http://${API_URL}/api/recipes/${editingRecipe.id}`
-        : `http://${API_URL}/api/recipes`;
+        ? `${API_URL}/api/recipes/${editingRecipe.id}`
+        : `${API_URL}/api/recipes`;
 
       const response = await fetch(url, {
         method: editingRecipe ? 'PUT' : 'POST',
@@ -371,7 +371,7 @@ const RecipeApp = () => {
     if (!window.confirm('Are you sure you want to delete this recipe?')) return;
 
     try {
-      const response = await fetch(`http://${API_URL}/api/recipes/${id}`, {
+      const response = await fetch(`${API_URL}/api/recipes/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${user.token}`
