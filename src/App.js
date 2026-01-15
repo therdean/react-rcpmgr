@@ -40,7 +40,7 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-const API_URL = process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL : 'http://20.166.175.208:8080/'
+const API_URL = process.env.REACT_APP_API_URL
 
 // Login Component (Admin Only)
 const LoginModal = ({ onLogin, onClose }) => {

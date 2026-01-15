@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
-ENV REACT_APP_API_URL=http://20.166.175.208:8080
+ENV REACT_APP_API_URL=http://springboot-rcpmgr-service:8080
 RUN npm run build
 
 FROM nginx:alpine
