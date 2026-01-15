@@ -64,7 +64,7 @@ const LoginModal = ({ onLogin, onClose }) => {
     setLoading(true);
 
     try {
-      const response = await fetch(`${API_URL}/api/auth/login`, {
+      const response = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
@@ -326,7 +326,7 @@ const RecipeApp = () => {
   const fetchRecipes = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_URL}/api/recipes`);
+      const response = await fetch(`${API_URL}/recipes`);
       if (!response.ok) throw new Error('Failed to fetch recipes');
       const data = await response.json();
       setRecipes(data);
@@ -342,8 +342,8 @@ const RecipeApp = () => {
   const saveRecipe = async (recipeData) => {
     try {
       const url = editingRecipe
-        ? `${API_URL}/api/recipes/${editingRecipe.id}`
-        : `${API_URL}/api/recipes`;
+        ? `${API_URL}/recipes/${editingRecipe.id}`
+        : `${API_URL}/recipes`;
 
       const response = await fetch(url, {
         method: editingRecipe ? 'PUT' : 'POST',
@@ -371,7 +371,7 @@ const RecipeApp = () => {
     if (!window.confirm('Are you sure you want to delete this recipe?')) return;
 
     try {
-      const response = await fetch(`${API_URL}/api/recipes/${id}`, {
+      const response = await fetch(`${API_URL}/recipes/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${user.token}`
